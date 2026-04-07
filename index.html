@@ -4,65 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IntakeX</title>
-<style>
-/* Dark app theme */
-body { font-family: Arial; margin:0; padding:0; background-color:#121212; color:white; }
-.container { max-width:600px; margin:auto; padding:20px; }
-h2, h3 { color:#ff6600; }
-input { padding:10px; margin:5px 0; width:70%; border-radius:8px; border:none; }
-button { padding:10px 15px; margin-left:5px; border:none; border-radius:12px; background-color:#ff6600; color:white; cursor:pointer; }
-button:hover { background-color:#ff8533; }
-.tab-header { display:flex; margin-bottom:10px; }
-.tab-header div { flex:1; text-align:center; padding:10px; cursor:pointer; border-radius:8px 8px 0 0; background:#1f1f1f; margin-right:2px; }
-.tab-header div.active { background:#ff6600; color:white; }
-.tab-content { padding:10px; background:#1f1f1f; border-radius:0 0 8px 8px; min-height:300px; }
-ul { list-style:none; padding:0; }
-li { margin:5px 0; }
-.delete-btn, .edit-btn { margin-left:10px; padding:2px 5px; border-radius:6px; background:#ff6600; color:white; border:none; cursor:pointer; }
-.delete-btn:hover, .edit-btn:hover { background:#ff8533; }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="container">
-<h2>IntakeX</h2>
+    <h2>IntakeX</h2>
 
-<!-- Tabs -->
-<div class="tab-header">
-  <div id="dailyTab" class="active" onclick="showTab('daily')">Daily Log</div>
-  <div id="vaultTab" onclick="showTab('vault')">Food Vault</div>
-</div>
+    <!-- Tabs -->
+    <div class="tab-header">
+        <div id="dailyTab" class="active" onclick="showTab('daily')">Daily Log</div>
+        <div id="vaultTab" onclick="showTab('vault')">Food Vault</div>
+    </div>
 
-<!-- Tab Contents -->
-<div id="daily" class="tab-content">
-  <!-- Food Entry -->
-  <div style="margin-bottom:15px;">
-    <input type="text" id="foodInput" placeholder="Food name">
-    <input type="number" id="gramInput" placeholder="Grams">
-    <span>grams</span>
-    <button onclick="addFood()">Add</button>
-  </div>
+    <!-- Daily Log Tab -->
+    <div id="daily" class="tab-content">
+        <div style="margin-bottom:15px;">
+            <input type="text" id="foodInput" placeholder="Food name">
+            <input type="number" id="gramInput" placeholder="Grams">
+            <span>grams</span>
+            <button onclick="addFood()">Add</button>
+        </div>
 
-  <h3>Daily Totals</h3>
-  <p>Calories: <span id="calories">0</span></p>
-  <p>Protein: <span id="protein">0</span>g</p>
+        <h3>Daily Totals</h3>
+        <p>Calories: <span id="calories">0</span></p>
+        <p>Protein: <span id="protein">0</span>g</p>
 
-  <h3>Food Logs</h3>
-  <div id="dayTabs"></div>
-  <ul id="foodList"></ul>
-</div>
+        <h3>Food Logs</h3>
+        <div id="dayTabs"></div>
+        <ul id="foodList"></ul>
+    </div>
 
-<div id="vault" class="tab-content" style="display:none;">
-  <h3>Food Vault</h3>
-  <div style="margin-bottom:15px;">
-    <input type="text" id="vaultFoodName" placeholder="Food name">
-    <input type="number" id="vaultCalories" placeholder="Calories/100g">
-    <input type="number" id="vaultProtein" placeholder="Protein/100g">
-    <button onclick="addVaultFood()">Add Food</button>
-  </div>
-  <ul id="vaultList"></ul>
+    <!-- Food Vault Tab -->
+    <div id="vault" class="tab-content" style="display:none;">
+        <h3>Food Vault</h3>
+        <div style="margin-bottom:15px;">
+            <input type="text" id="vaultFoodName" placeholder="Food name">
+            <input type="number" id="vaultCalories" placeholder="Calories/100g">
+            <input type="number" id="vaultProtein" placeholder="Protein/100g">
+            <button onclick="addVaultFood()">Add Food</button>
+        </div>
+        <ul id="vaultList"></ul>
+    </div>
+
 </div>
 
 <script src="app.js"></script>
-</div>
 </body>
 </html>

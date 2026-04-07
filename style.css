@@ -1,9 +1,8 @@
-/* --- General Styles --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* dark background */
+    background-color: #121212;
     color: white;
 }
 
@@ -13,12 +12,10 @@ body {
     padding: 20px;
 }
 
-/* --- Headings --- */
 h2, h3 {
     color: #ff6600;
 }
 
-/* --- Inputs --- */
 input[type="text"], input[type="number"] {
     padding: 10px;
     margin: 5px 0;
@@ -29,7 +26,6 @@ input[type="text"], input[type="number"] {
     color: white;
 }
 
-/* --- Buttons --- */
 button {
     padding: 10px 15px;
     margin-left: 5px;
@@ -45,7 +41,6 @@ button:hover {
     background-color: #ff8533;
 }
 
-/* --- Tabs --- */
 .tab-header {
     display: flex;
     margin-bottom: 10px;
@@ -67,7 +62,6 @@ button:hover {
     color: white;
 }
 
-/* --- Tab Content --- */
 .tab-content {
     padding: 10px;
     background: #1f1f1f;
@@ -75,7 +69,6 @@ button:hover {
     min-height: 300px;
 }
 
-/* --- Lists --- */
 ul {
     list-style: none;
     padding: 0;
@@ -85,7 +78,6 @@ li {
     margin: 5px 0;
 }
 
-/* --- Buttons inside lists --- */
 .delete-btn, .edit-btn {
     margin-left: 10px;
     padding: 2px 5px;
