@@ -7,42 +7,19 @@ let selectedDay = new Date().toISOString().split("T")[0];
 // Load foods.json
 fetch("foods.json")
   .then(res => res.json())
-  .then(data => {
-    preloadedFoods = data;
-    initAutocomplete();
-    renderTabs();
-    renderDay(selectedDay);
-    renderVault();
-  })
+  .then(data => { preloadedFoods = data; initAutocomplete(); renderTabs(); renderDay(selectedDay); renderVault(); })
   .catch(err => console.error("Failed to load foods.json", err));
 
-// ---- Autocomplete ----
+// ---- Autocomplete (simplified, placeholder) ----
 function initAutocomplete() {
   const input = document.getElementById("foodInput");
   const suggestionsDiv = document.getElementById("suggestions");
-
   input.addEventListener("input", function() {
-    const query = this.value.trim().toLowerCase();
     suggestionsDiv.innerHTML = "";
-    if (!query) return;
-
-    const combined = [...vault, ...preloadedFoods];
-    const matches = combined.filter(f => f.name.toLowerCase().includes(query)).slice(0, 10);
-
-    matches.forEach(food => {
-      const div = document.createElement("div");
-      div.className = "suggestion-item";
-      div.innerText = food.name;
-      div.onclick = () => {
-        input.value = food.name;
-        suggestionsDiv.innerHTML = "";
-      };
-      suggestionsDiv.appendChild(div);
-    });
   });
 }
 
-// ---- Add Food to Daily Log ----
+// ---- Add Food ----
 function addFood() {
   const foodName = document.getElementById("foodInput").value.trim();
   const grams = parseFloat(document.getElementById("gramInput").value);
@@ -52,7 +29,7 @@ function addFood() {
   const pre = preloadedFoods.find(f => f.name.toLowerCase() === foodName.toLowerCase());
   const foodSource = custom || pre;
 
-  if (!foodSource) { alert("Food not found in vault or preloaded list."); return; }
+  if (!foodSource) { alert("Food not found."); return; }
 
   const calories = (foodSource.calories / 100) * grams;
   const protein = (foodSource.protein / 100) * grams;
@@ -66,8 +43,7 @@ function addFood() {
   localStorage.setItem("logs", JSON.stringify(logs));
 
   selectedDay = today;
-  renderTabs();
-  renderDay(selectedDay);
+  renderTabs(); renderDay(selectedDay);
 
   document.getElementById("foodInput").value = "";
   document.getElementById("gramInput").value = "";
@@ -102,8 +78,7 @@ function renderDay(day) {
     const li = document.createElement("li");
     li.innerHTML = `<span>${log.food} - ${log.grams}g → ${Math.round(log.calories)} cal, ${log.protein.toFixed(1)}g protein (${log.time})</span>`;
     const delBtn = document.createElement("button");
-    delBtn.className = "delete-btn";
-    delBtn.innerText = "Delete";
+    delBtn.className = "delete-btn"; delBtn.innerText = "Delete";
     delBtn.onclick = () => { deleteEntry(log); };
     li.appendChild(delBtn);
     foodList.appendChild(li);
@@ -113,8 +88,7 @@ function renderDay(day) {
 function deleteEntry(entry) {
   logs = logs.filter(l => !(l.date===entry.date && l.time===entry.time && l.food===entry.food));
   localStorage.setItem("logs", JSON.stringify(logs));
-  renderTabs();
-  renderDay(selectedDay);
+  renderTabs(); renderDay(selectedDay);
 }
 
 // ---- Food Vault ----

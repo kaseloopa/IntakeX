@@ -5,24 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IntakeX</title>
 <style>
-  body { font-family: Arial; padding: 20px; max-width: 600px; margin:auto; }
-  input { padding: 5px; margin: 5px 0; width: 80%; }
-  button { padding: 5px 10px; margin-left: 5px; }
-  #suggestions { border: 1px solid #ccc; max-height:150px; overflow-y:auto; }
-  .suggestion-item { padding:5px; cursor:pointer; }
-  .suggestion-item:hover { background-color:#eee; }
-  .tab { margin:5px; display:inline-block; cursor:pointer; padding:5px 10px; border:1px solid #ccc; border-radius:4px; }
-  .tab.active { background-color:#ff6600; color:white; }
-  ul { list-style:none; padding:0; }
-  li { margin:5px 0; }
-  .delete-btn, .edit-btn { margin-left:10px; padding:2px 5px; }
+body { font-family: Arial; padding: 20px; max-width: 600px; margin:auto; }
+input { padding: 5px; margin: 5px 0; width: 80%; }
+button { padding: 5px 10px; margin-left: 5px; }
+#suggestions { border: 1px solid #ccc; max-height:150px; overflow-y:auto; position:absolute; background:white; z-index:100; }
+.suggestion-item { padding:5px; cursor:pointer; }
+.suggestion-item:hover { background-color:#eee; }
+.tab { margin:5px; display:inline-block; cursor:pointer; padding:5px 10px; border:1px solid #ccc; border-radius:4px; }
+.tab.active { background-color:#ff6600; color:white; }
+ul { list-style:none; padding:0; }
+li { margin:5px 0; }
+.delete-btn, .edit-btn { margin-left:10px; padding:2px 5px; }
 </style>
 </head>
 <body>
 
 <h2>IntakeX</h2>
 
-<div>
+<!-- Food Entry -->
+<div style="position:relative;">
   <input type="text" id="foodInput" placeholder="Food name">
   <div id="suggestions"></div>
   <input type="number" id="gramInput" placeholder="Grams">
@@ -38,6 +39,7 @@
 <div id="dayTabs"></div>
 <ul id="foodList"></ul>
 
+<!-- Food Vault -->
 <h3>Food Vault</h3>
 <div>
   <input type="text" id="vaultFoodName" placeholder="Food name">
