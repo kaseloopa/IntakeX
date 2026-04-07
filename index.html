@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Protein Tracker</title>
+  <title>IntakeX</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Daily Tracker</h1>
+<h1>IntakeX</h1>
 
-<input id="foodInput" placeholder="e.g. 30g waffles" />
+<div class="input-row">
+  <input id="foodInput" placeholder="Food (e.g. waffles)" />
+</div>
+
+<div class="input-row">
+  <input id="gramInput" type="number" placeholder="Amount" />
+  <span class="grams-label">grams</span>
+</div>
+
 <button onclick="addFood()">Add</button>
 
 <h2>Today</h2>
