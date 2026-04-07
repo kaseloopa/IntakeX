@@ -1,66 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>IntakeX</title>
-  <link rel="stylesheet" href="style.css?v=8">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IntakeX</title>
+<style>
+  body { font-family: Arial; padding: 20px; max-width: 600px; margin:auto; }
+  input { padding: 5px; margin: 5px 0; width: 80%; }
+  button { padding: 5px 10px; margin-left: 5px; }
+  #suggestions { border: 1px solid #ccc; max-height:150px; overflow-y:auto; }
+  .suggestion-item { padding:5px; cursor:pointer; }
+  .suggestion-item:hover { background-color:#eee; }
+  .tab { margin:5px; display:inline-block; cursor:pointer; padding:5px 10px; border:1px solid #ccc; border-radius:4px; }
+  .tab.active { background-color:#ff6600; color:white; }
+  ul { list-style:none; padding:0; }
+  li { margin:5px 0; }
+  .delete-btn, .edit-btn { margin-left:10px; padding:2px 5px; }
+</style>
 </head>
 <body>
 
-<h1>IntakeX</h1>
+<h2>IntakeX</h2>
 
-<div class="tab-container">
-  <button class="tab-btn active" onclick="showTab('log')">Log Food</button>
-  <button class="tab-btn" onclick="showTab('vault')">Food Vault</button>
-</div>
-
-<div id="logTab" class="tab-content">
-
-  <div class="input-container">
-    <input id="foodInput" placeholder="Food (e.g., Eggo Waffle, 93/7 cooked beef)" autocomplete="off"/>
-    <div id="suggestions" class="suggestions"></div>
-  </div>
-
-  <div class="input-container">
-    <input id="gramInput" type="number" placeholder="Amount"/>
-    <span class="grams-label">grams</span>
-  </div>
-
+<div>
+  <input type="text" id="foodInput" placeholder="Food name">
+  <div id="suggestions"></div>
+  <input type="number" id="gramInput" placeholder="Grams">
+  <span>grams</span>
   <button onclick="addFood()">Add</button>
-
-  <h2>Daily Logs</h2>
-  <div id="dayTabs"></div>
-
-  <div class="totals">
-    <p>Calories: <span id="calories">0</span></p>
-    <p>Protein: <span id="protein">0</span>g</p>
-  </div>
-
-  <ul id="foodList"></ul>
-
-  <h2>Daily Graph</h2>
-  <canvas id="dailyGraph" height="200"></canvas>
-
-  <h2>30-Day Trend</h2>
-  <canvas id="trendGraph" height="200"></canvas>
-
 </div>
 
-<div id="vaultTab" class="tab-content" style="display:none;">
+<h3>Daily Totals</h3>
+<p>Calories: <span id="calories">0</span></p>
+<p>Protein: <span id="protein">0</span>g</p>
 
-  <h2>Food Vault</h2>
+<h3>Food Logs</h3>
+<div id="dayTabs"></div>
+<ul id="foodList"></ul>
 
-  <div class="input-container">
-    <input id="vaultFoodName" placeholder="Food Name"/>
-    <input id="vaultCalories" type="number" placeholder="Calories per 100g"/>
-    <input id="vaultProtein" type="number" placeholder="Protein per 100g"/>
-    <button onclick="addVaultFood()">Add Food</button>
-  </div>
-
-  <ul id="vaultList"></ul>
-
+<h3>Food Vault</h3>
+<div>
+  <input type="text" id="vaultFoodName" placeholder="Food name">
+  <input type="number" id="vaultCalories" placeholder="Calories/100g">
+  <input type="number" id="vaultProtein" placeholder="Protein/100g">
+  <button onclick="addVaultFood()">Add Food</button>
 </div>
+<ul id="vaultList"></ul>
 
-<script src="app.js?v=8"></script>
+<script src="app.js"></script>
 </body>
 </html>
