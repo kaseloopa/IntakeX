@@ -25,10 +25,9 @@ document.getElementById("foodInput").addEventListener("input", function() {
 });
 
 function getSuggestions(query) {
-    const API_KEY = "nQkzCqk5jBlJU7xGy1GW4UoNaBvRnygXdDugh5YP"; // replace
-    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&requireAllWords=true&pageSize=5&api_key=${API_KEY}`;
-
-    fetch(url).then(res=>res.json()).then(data=>{
+    fetch(`/api/food-search?query=${encodeURIComponent(query)}`)
+    .then(res=>res.json())
+    .then(data=>{
         const suggestionsDiv = document.getElementById("suggestions");
         suggestionsDiv.innerHTML="";
         if (!data.foods) return;
@@ -44,7 +43,8 @@ function getSuggestions(query) {
             };
             suggestionsDiv.appendChild(item);
         });
-    }).catch(console.error);
+    })
+    .catch(console.error);
 }
 
 function addFood() {
@@ -52,10 +52,7 @@ function addFood() {
     const grams = parseFloat(document.getElementById("gramInput").value);
     if (!foodName || !grams || grams<=0) { alert("Enter valid food & grams."); return; }
 
-    const API_KEY = "YOUR_USDA_API_KEY";
-    const url = selectedFDCId ? 
-        `https://api.nal.usda.gov/fdc/v1/food/${selectedFDCId}?api_key=${API_KEY}` :
-        `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(foodName)}&pageSize=1&api_key=${API_KEY}`;
+    const url = selectedFDCId ? `/api/food/${selectedFDCId}` : `/api/food-search?query=${encodeURIComponent(foodName)}`;
 
     fetch(url).then(res=>res.json()).then(data=>{
         let foodData = data.foodNutrients ? data : data.foods[0];
