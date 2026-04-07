@@ -25,7 +25,7 @@ document.getElementById("foodInput").addEventListener("input", function() {
 });
 
 function getSuggestions(query) {
-    const API_KEY = "YOUR_USDA_API_KEY"; // replace
+    const API_KEY = "nQkzCqk5jBlJU7xGy1GW4UoNaBvRnygXdDugh5YP"; // replace
     const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(query)}&requireAllWords=true&pageSize=5&api_key=${API_KEY}`;
 
     fetch(url).then(res=>res.json()).then(data=>{
