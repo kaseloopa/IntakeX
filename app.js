@@ -1,4 +1,3 @@
-// IntakeX Fixed Version
 let logs = JSON.parse(localStorage.getItem("logs")) || [];
 let vault = JSON.parse(localStorage.getItem("vault")) || [];
 let preloadedFoods = []; 
@@ -6,13 +5,14 @@ const THIRTY_DAYS = 30;
 let selectedDay = new Date().toISOString().split("T")[0];
 let dailyChart, trendChart;
 
-// Load preloaded foods
+// Load preloaded foods from JSON first
 fetch("foods.json")
   .then(res => res.json())
   .then(data => {
     preloadedFoods = data;
     initAutocomplete();
-  });
+  })
+  .catch(err => console.error("Failed to load foods.json:", err));
 
 // ---- Autocomplete ----
 function initAutocomplete() {
@@ -125,12 +125,12 @@ function renderDailyGraph() {
   dailyChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ["Calories", "Protein (g)"],
+      labels: ["Calories", "Protein"],
       datasets: [{
         label: "Totals",
         data: [totalCalories, totalProtein],
-        borderColor: ['#ff6600','#33cc33'],
-        backgroundColor: ['rgba(255,102,0,0.2)','rgba(51,204,51,0.2)'],
+        borderColor: '#ff6600',
+        backgroundColor: 'rgba(255,102,0,0.2)',
         fill: true,
         tension: 0.3
       }]
@@ -153,62 +153,9 @@ function renderTrendGraph() {
       labels: dates,
       datasets:[
         {label:'Calories', data: caloriesData, borderColor:'#ff6600', backgroundColor:'rgba(255,102,0,0.2)', fill:true, tension:0.3},
-        {label:'Protein (g)', data: proteinData, borderColor:'#33cc33', backgroundColor:'rgba(51,204,51,0.2)', fill:true, tension:0.3}
+        {label:'Protein', data: proteinData, borderColor:'#33cc33', backgroundColor:'rgba(51,204,51,0.2)', fill:true, tension:0.3}
       ]
     },
     options:{responsive:true, scales:{y:{beginAtZero:true}}}
   });
 }
-
-// ---- Vault Functions (unchanged) ----
-function renderVault() {
-  const list = document.getElementById("vaultList");
-  list.innerHTML = "";
-  vault.forEach((f,index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `<span>${f.name} → ${f.calories} cal/100g, ${f.protein}g protein</span>`;
-    const editBtn = document.createElement("button");
-    editBtn.className="edit-btn"; editBtn.innerText="Edit";
-    editBtn.onclick=()=>{ editVaultFood(index); };
-    const delBtn = document.createElement("button");
-    delBtn.className="delete-btn"; delBtn.innerText="Delete";
-    delBtn.onclick=()=>{ deleteVaultFood(index); };
-    li.appendChild(editBtn); li.appendChild(delBtn);
-    list.appendChild(li);
-  });
-}
-
-function addVaultFood() {
-  const name=document.getElementById("vaultFoodName").value.trim();
-  const calories=parseFloat(document.getElementById("vaultCalories").value);
-  const protein=parseFloat(document.getElementById("vaultProtein").value);
-  if(!name||isNaN(calories)||isNaN(protein)){alert("Enter valid values."); return;}
-  vault.push({name, calories, protein});
-  localStorage.setItem("vault",JSON.stringify(vault));
-  renderVault();
-  document.getElementById("vaultFoodName").value="";
-  document.getElementById("vaultCalories").value="";
-  document.getElementById("vaultProtein").value="";
-}
-
-function editVaultFood(index) {
-  const food=vault[index];
-  const newName=prompt("Food Name:",food.name); if(newName===null) return;
-  const newCal=parseFloat(prompt("Calories per 100g:",food.calories)); if(isNaN(newCal)) return;
-  const newProtein=parseFloat(prompt("Protein per 100g:",food.protein)); if(isNaN(newProtein)) return;
-  vault[index]={name:newName, calories:newCal, protein:newProtein};
-  localStorage.setItem("vault",JSON.stringify(vault));
-  renderVault();
-}
-
-function deleteVaultFood(index){
-  vault.splice(index,1);
-  localStorage.setItem("vault",JSON.stringify(vault));
-  renderVault();
-}
-
-// ---- Initial Rendering ----
-renderTabs();
-renderDay(selectedDay);
-renderDailyGraph();
-renderTrendGraph();
