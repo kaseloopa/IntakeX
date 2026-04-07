@@ -1,24 +1,42 @@
 body {
   font-family: Arial;
-  padding: 20px;
+  padding: 25px;
   background: #111;
   color: white;
+  font-size: 1.15em; /* 15% larger */
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 15px;
 }
 
 input {
-  padding: 10px;
-  margin-top: 10px;
-  width: 200px;
+  padding: 12px;
+  width: 250px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.15em;
 }
 
 button {
-  padding: 10px;
+  padding: 12px 20px;
+  font-size: 1.15em;
+  border-radius: 8px;
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  cursor: pointer;
   margin-top: 10px;
-  display: block;
 }
 
-.input-row {
-  margin-bottom: 10px;
+button:hover {
+  background-color: #ff8533;
 }
 
 .grams-label {
@@ -27,20 +45,70 @@ button {
 }
 
 #dayTabs {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
 
 .day-tab {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 8px 15px;
   margin-right: 5px;
   background: #333;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-size: 1.15em;
 }
 
 .day-tab.active {
   background: #ff6600;
   font-weight: bold;
+}
+
+.totals p {
+  font-size: 1.3em;
+  margin: 5px 0;
+}
+
+#foodList li {
+  background: #222;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn {
+  background: #cc0000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #ff3333;
+}
+
+.suggestions {
+  position: absolute;
+  top: 45px;
+  width: 250px;
+  background: #222;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+  font-size: 1.1em;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #444;
 }

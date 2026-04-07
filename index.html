@@ -2,17 +2,18 @@
 <html>
 <head>
   <title>IntakeX</title>
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
 <h1>IntakeX</h1>
 
-<div class="input-row">
-  <input id="foodInput" placeholder="Food (e.g. cooked beef)" />
+<div class="input-container">
+  <input id="foodInput" placeholder="Food (e.g., 93/7 cooked beef)" autocomplete="off" />
+  <div id="suggestions" class="suggestions"></div>
 </div>
 
-<div class="input-row">
+<div class="input-container">
   <input id="gramInput" type="number" placeholder="Amount" />
   <span class="grams-label">grams</span>
 </div>
@@ -21,16 +22,15 @@
 
 <h2>Daily Logs</h2>
 
-<!-- Tabs container -->
 <div id="dayTabs"></div>
 
-<!-- Daily totals -->
-<p>Calories: <span id="calories">0</span></p>
-<p>Protein: <span id="protein">0</span>g</p>
+<div class="totals">
+  <p>Calories: <span id="calories">0</span></p>
+  <p>Protein: <span id="protein">0</span>g</p>
+</div>
 
-<!-- Food list for selected day -->
 <ul id="foodList"></ul>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
