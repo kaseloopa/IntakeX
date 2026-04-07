@@ -2,41 +2,65 @@
 <html>
 <head>
   <title>IntakeX</title>
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=8">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <h1>IntakeX</h1>
 
-<div class="input-container">
-  <input id="foodInput" placeholder="Food (e.g., Eggo Waffle, 93/7 cooked beef)" autocomplete="off"/>
-  <div id="suggestions" class="suggestions"></div>
+<div class="tab-container">
+  <button class="tab-btn active" onclick="showTab('log')">Log Food</button>
+  <button class="tab-btn" onclick="showTab('vault')">Food Vault</button>
 </div>
 
-<div class="input-container">
-  <input id="gramInput" type="number" placeholder="Amount"/>
-  <span class="grams-label">grams</span>
+<div id="logTab" class="tab-content">
+
+  <div class="input-container">
+    <input id="foodInput" placeholder="Food (e.g., Eggo Waffle, 93/7 cooked beef)" autocomplete="off"/>
+    <div id="suggestions" class="suggestions"></div>
+  </div>
+
+  <div class="input-container">
+    <input id="gramInput" type="number" placeholder="Amount"/>
+    <span class="grams-label">grams</span>
+  </div>
+
+  <button onclick="addFood()">Add</button>
+
+  <h2>Daily Logs</h2>
+  <div id="dayTabs"></div>
+
+  <div class="totals">
+    <p>Calories: <span id="calories">0</span></p>
+    <p>Protein: <span id="protein">0</span>g</p>
+  </div>
+
+  <ul id="foodList"></ul>
+
+  <h2>Daily Graph</h2>
+  <canvas id="dailyGraph" height="200"></canvas>
+
+  <h2>30-Day Trend</h2>
+  <canvas id="trendGraph" height="200"></canvas>
+
 </div>
 
-<button onclick="addFood()">Add</button>
+<div id="vaultTab" class="tab-content" style="display:none;">
 
-<h2>Daily Logs</h2>
-<div id="dayTabs"></div>
+  <h2>Food Vault</h2>
 
-<div class="totals">
-  <p>Calories: <span id="calories">0</span></p>
-  <p>Protein: <span id="protein">0</span>g</p>
+  <div class="input-container">
+    <input id="vaultFoodName" placeholder="Food Name"/>
+    <input id="vaultCalories" type="number" placeholder="Calories per 100g"/>
+    <input id="vaultProtein" type="number" placeholder="Protein per 100g"/>
+    <button onclick="addVaultFood()">Add Food</button>
+  </div>
+
+  <ul id="vaultList"></ul>
+
 </div>
 
-<ul id="foodList"></ul>
-
-<h2>Daily Graph</h2>
-<canvas id="dailyGraph" height="200"></canvas>
-
-<h2>30-Day Trend</h2>
-<canvas id="trendGraph" height="200"></canvas>
-
-<script src="app.js?v=6"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
