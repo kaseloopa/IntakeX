@@ -3,27 +3,21 @@ body {
   padding: 25px;
   background: #111;
   color: white;
-  font-size: 1.15em; /* 15% larger */
+  font-size: 1.15em;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-h1 {
-  font-size: 2em;
-  margin-bottom: 15px;
-}
+h1 { font-size: 2em; margin-bottom: 15px; }
 
-.input-container {
-  position: relative;
-  margin-bottom: 15px;
-}
-
+.input-container { position: relative; margin-bottom: 15px; }
 input {
   padding: 12px;
-  width: 250px;
+  width: 100%;
   border-radius: 8px;
   border: none;
   font-size: 1.15em;
 }
-
 button {
   padding: 12px 20px;
   font-size: 1.15em;
@@ -33,22 +27,13 @@ button {
   border: none;
   cursor: pointer;
   margin-top: 10px;
+  width: 100%;
 }
+button:hover { background-color: #ff8533; }
 
-button:hover {
-  background-color: #ff8533;
-}
+.grams-label { margin-left: 10px; font-weight: bold; }
 
-.grams-label {
-  margin-left: 10px;
-  font-weight: bold;
-}
-
-#dayTabs {
-  margin-top: 25px;
-  margin-bottom: 15px;
-}
-
+#dayTabs { margin-top: 25px; margin-bottom: 15px; }
 .day-tab {
   display: inline-block;
   padding: 8px 15px;
@@ -58,16 +43,9 @@ button:hover {
   border-radius: 10px;
   font-size: 1.15em;
 }
+.day-tab.active { background: #ff6600; font-weight: bold; }
 
-.day-tab.active {
-  background: #ff6600;
-  font-weight: bold;
-}
-
-.totals p {
-  font-size: 1.3em;
-  margin: 5px 0;
-}
+.totals p { font-size: 1.3em; margin: 5px 0; }
 
 #foodList li {
   background: #222;
@@ -87,15 +65,12 @@ button:hover {
   color: white;
   cursor: pointer;
 }
-
-.delete-btn:hover {
-  background: #ff3333;
-}
+.delete-btn:hover { background: #ff3333; }
 
 .suggestions {
   position: absolute;
   top: 45px;
-  width: 250px;
+  width: 100%;
   background: #222;
   border-radius: 8px;
   max-height: 150px;
@@ -103,12 +78,15 @@ button:hover {
   z-index: 10;
   font-size: 1.1em;
 }
-
 .suggestion-item {
   padding: 8px;
   cursor: pointer;
 }
+.suggestion-item:hover { background: #444; }
 
-.suggestion-item:hover {
-  background: #444;
+canvas { background: #1a1a1a; border-radius: 8px; margin-bottom: 20px; }
+@media screen and (max-width: 400px) {
+  body { font-size: 1em; padding: 15px; }
+  input, button { font-size: 1em; padding: 10px; }
+  .day-tab { font-size: 1em; padding: 6px 10px; }
 }

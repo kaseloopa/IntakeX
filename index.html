@@ -2,26 +2,26 @@
 <html>
 <head>
   <title>IntakeX</title>
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
 <h1>IntakeX</h1>
 
 <div class="input-container">
-  <input id="foodInput" placeholder="Food (e.g., 93/7 cooked beef)" autocomplete="off" />
+  <input id="foodInput" placeholder="Food (e.g., Eggo Waffle, 93/7 cooked beef)" autocomplete="off"/>
   <div id="suggestions" class="suggestions"></div>
 </div>
 
 <div class="input-container">
-  <input id="gramInput" type="number" placeholder="Amount" />
+  <input id="gramInput" type="number" placeholder="Amount"/>
   <span class="grams-label">grams</span>
 </div>
 
 <button onclick="addFood()">Add</button>
 
 <h2>Daily Logs</h2>
-
 <div id="dayTabs"></div>
 
 <div class="totals">
@@ -31,6 +31,12 @@
 
 <ul id="foodList"></ul>
 
-<script src="app.js?v=4"></script>
+<h2>Daily Graph</h2>
+<canvas id="dailyGraph" height="200"></canvas>
+
+<h2>30-Day Trend</h2>
+<canvas id="trendGraph" height="200"></canvas>
+
+<script src="app.js?v=5"></script>
 </body>
 </html>
