@@ -1,11 +1,10 @@
 let totalCalories = 0;
 let totalProtein = 0;
 
-// Load logs from localStorage
 let logs = JSON.parse(localStorage.getItem("logs")) || [];
-
-// Keep only last 30 days on load
 const THIRTY_DAYS = 30;
+
+// Remove logs older than 30 days on load
 logs = logs.filter(log => {
   const logDate = new Date(log.date);
   const now = new Date();
@@ -13,12 +12,12 @@ logs = logs.filter(log => {
   return diffDays <= THIRTY_DAYS;
 });
 
-// Update UI totals and list
-logs.forEach(log => {
-  totalCalories += log.calories;
-  totalProtein += log.protein;
-  addListItem(log.food, log.grams, log.calories, log.protein);
-});
+// Track selected day (default today)
+let selectedDay = new Date().toISOString().split("T")[0];
+
+// Render tabs on load
+renderTabs();
+renderDay(selectedDay);
 
 function addFood() {
     const foodName = document.getElementById("foodInput").value.trim();
@@ -29,7 +28,7 @@ function addFood() {
         return;
     }
 
-    const API_KEY = "nQkzCqk5jBlJU7xGy1GW4UoNaBvRnygXdDugh5YP"; // <-- Replace this with user generated API key
+    const API_KEY = "nQkzCqk5jBlJU7xGy1GW4UoNaBvRnygXdDugh5YP"; // Replace with your key
     const searchUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${foodName}&pageSize=1&api_key=${API_KEY}`;
 
     fetch(searchUrl)
@@ -56,16 +55,9 @@ function addFood() {
           const calories = (caloriesPer100g / 100) * grams;
           const protein = (proteinPer100g / 100) * grams;
 
-          totalCalories += calories;
-          totalProtein += protein;
-
-          document.getElementById("calories").innerText = Math.round(totalCalories);
-          document.getElementById("protein").innerText = totalProtein.toFixed(1);
-
-          addListItem(foodName, grams, calories, protein);
-
-          // Save log
           const today = new Date().toISOString().split("T")[0];
+
+          // Add to logs
           logs.push({date: today, food: foodName, grams, calories, protein});
 
           // Keep only last 30 days
@@ -78,6 +70,11 @@ function addFood() {
 
           localStorage.setItem("logs", JSON.stringify(logs));
 
+          // Refresh tabs and day view
+          selectedDay = today;
+          renderTabs();
+          renderDay(selectedDay);
+
           // Clear inputs
           document.getElementById("foodInput").value = "";
           document.getElementById("gramInput").value = "";
@@ -89,8 +86,41 @@ function addFood() {
       });
 }
 
-function addListItem(food, grams, calories, protein) {
-    const li = document.createElement("li");
-    li.innerText = `${food} - ${grams}g → ${Math.round(calories)} cal, ${protein.toFixed(1)}g protein`;
-    document.getElementById("foodList").appendChild(li);
+function renderTabs() {
+    const dayTabs = document.getElementById("dayTabs");
+    dayTabs.innerHTML = "";
+
+    // Get unique dates from logs
+    const uniqueDates = [...new Set(logs.map(log => log.date))].sort((a,b) => new Date(b) - new Date(a));
+
+    uniqueDates.forEach(date => {
+        const tab = document.createElement("div");
+        tab.className = "day-tab" + (date === selectedDay ? " active" : "");
+        tab.innerText = date;
+        tab.onclick = () => {
+            selectedDay = date;
+            renderDay(selectedDay);
+            renderTabs();
+        };
+        dayTabs.appendChild(tab);
+    });
+}
+
+function renderDay(day) {
+    const dayLogs = logs.filter(log => log.date === day);
+
+    totalCalories = dayLogs.reduce((sum, log) => sum + log.calories, 0);
+    totalProtein = dayLogs.reduce((sum, log) => sum + log.protein, 0);
+
+    document.getElementById("calories").innerText = Math.round(totalCalories);
+    document.getElementById("protein").innerText = totalProtein.toFixed(1);
+
+    const foodList = document.getElementById("foodList");
+    foodList.innerHTML = "";
+
+    dayLogs.forEach(log => {
+        const li = document.createElement("li");
+        li.innerText = `${log.food} - ${log.grams}g → ${Math.round(log.calories)} cal, ${log.protein.toFixed(1)}g protein`;
+        foodList.appendChild(li);
+    });
 }
