@@ -5,6 +5,7 @@ body {
     background: #eef2f7;
     color: #1f2937;
 }
+
 /* App container */
 .container {
     max-width: 420px;
@@ -55,7 +56,7 @@ h2 {
     background: #e9edf5;
     border-radius: 16px;
     overflow: hidden;
-    gap: 6px; /* small gap between input and button */
+    gap: 6px;
 }
 
 /* Text / number inputs */
@@ -63,36 +64,33 @@ h2 {
     border: none;
     background: transparent;
     padding: 14px;
-    flex: 1;           /* input takes all remaining space */
-    min-width: 0;      /* important for flex overflow */
+    flex: 1;
+    min-width: 0;
     font-size: 14px;
     color: #374151;
 }
 
-/* Add button */
-.input-row button {
-    background: linear-gradient(135deg, #5fa8ff, #3b82f6);
-    border: none;
-    color: white;
-    padding: 14px 16px; /* slightly smaller horizontal padding */
-    border-radius: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(59,130,246,0.3);
-    flex-shrink: 0;   /* prevent shrinking */
+.input-row input::placeholder {
+    color: #9ca3af;
+}
+
+.input-row input:focus {
+    outline: none;
 }
 
 /* Add button */
-.input-row button {
-    background: linear-gradient(135deg, #5fa8ff, #3b82f6);
-    border: none;
-    color: white;
-    padding: 14px 22px;
+.input-row + button,
+button.add-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 14px 0;
     border-radius: 12px;
-    margin: 6px;
+    background: linear-gradient(135deg, #5fa8ff, #3b82f6);
+    color: white;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(59,130,246,0.3);
+    border: none;
 }
 
 /* Section titles */
@@ -107,9 +105,46 @@ h3 {
     font-size: 15px;
 }
 
-/* Food log item */
-li {
+/* Food log container */
+.logs-container {
+    display: flex;
+    gap: 12px;
+}
+
+/* Dates column */
+.logs-dates {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    max-width: 100px;
+}
+
+/* Date buttons */
+.logs-dates button {
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: none;
+    background: #e5e7eb;
+    color: #374151;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.logs-dates button.active {
+    background: #3b82f6;
+    color: white;
+}
+
+/* Foods column */
+.logs-food {
+    flex: 3;
     list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logs-food li {
     background: #f1f5f9;
     padding: 12px 14px;
     border-radius: 14px;
@@ -130,4 +165,22 @@ li {
 
 .delete-btn:hover {
     background: #d1d5db;
+}
+
+/* Mobile stacking */
+@media (max-width: 480px) {
+    .logs-container {
+        flex-direction: column;
+    }
+
+    .logs-dates {
+        max-width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 6px;
+    }
+
+    .logs-dates button {
+        flex: none;
+    }
 }

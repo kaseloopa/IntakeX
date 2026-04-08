@@ -8,60 +8,60 @@
 </head>
 <body>
 <div class="container">
-    <h2>IntakeX</h2>
+    <h2>Daily Intake</h2>
 
     <!-- Tabs -->
     <div class="tab-header">
-        <div id="dailyTab" class="active" onclick="showTab('daily')">Daily Log</div>
-        <div id="vaultTab" onclick="showTab('vault')">Food Vault</div>
+        <div class="active" onclick="showTab('daily')">Daily Log</div>
+        <div onclick="showTab('vault')">Food Vault</div>
     </div>
 
     <!-- Daily Log Tab -->
     <div id="daily" class="tab-content">
-
-    <!-- Input -->
-    <div class="card">
-        <div class="input-row">
-            <input type="text" id="foodInput" placeholder="Food name">
-            <input type="number" id="gramInput" placeholder="Grams">
+        <!-- Input -->
+        <div class="card">
+            <div class="input-row">
+                <input type="text" id="foodInput" placeholder="Food name">
+                <input type="number" id="gramInput" placeholder="Grams">
+            </div>
+            <button class="add-btn" onclick="addFood()">Add</button>
         </div>
-        <button onclick="addFood()" style="margin-top:10px; width:100%; padding:14px 0; border-radius:12px; background:linear-gradient(135deg, #5fa8ff, #3b82f6); color:white; font-weight:600; cursor:pointer; box-shadow:0 4px 10px rgba(59,130,246,0.3); border:none;">Add</button>
-    </div>
 
-    <!-- Totals -->
-    <div class="card totals">
-        <h3>Daily Totals</h3>
-        <p>🔥 Calories: <span id="calories">0</span></p>
-        <p>🧩 Protein: <span id="protein">0</span>g</p>
-    </div>
+        <!-- Totals -->
+        <div class="card totals">
+            <h3>Daily Totals</h3>
+            <p>🔥 Calories: <span id="calories">0</span></p>
+            <p>🧩 Protein: <span id="protein">0</span>g</p>
+        </div>
 
-    <!-- Logs -->
-    <div class="card">
-        <h3>Food Logs</h3>
-        <div id="dayTabs"></div>
-        <ul id="foodList"></ul>
-    </div>
+        <!-- Food Logs -->
+        <div class="card">
+            <h3>Food Logs</h3>
+            <div class="logs-container">
+                <!-- Dates column -->
+                <div id="dayTabs" class="logs-dates"></div>
 
-</div>
+                <!-- Foods logged -->
+                <ul id="foodList" class="logs-food"></ul>
+            </div>
+        </div>
+    </div>
 
     <!-- Food Vault Tab -->
     <div id="vault" class="tab-content" style="display:none;">
-
-    <div class="card">
-        <h3>Food Vault</h3>
-
-        <div class="input-row">
-            <input type="text" id="vaultFoodName" placeholder="Food name">
-            <input type="number" id="vaultCalories" placeholder="Calories/100g">
-            <input type="number" id="vaultProtein" placeholder="Protein/100g">
+        <div class="card">
+            <h3>Food Vault</h3>
+            <div class="input-row">
+                <input type="text" id="vaultFoodName" placeholder="Food name">
+                <input type="number" id="vaultCalories" placeholder="Calories/100g">
+                <input type="number" id="vaultProtein" placeholder="Protein/100g">
+            </div>
+            <button class="add-btn" onclick="addVaultFood()">Add</button>
         </div>
-        <button onclick="addVaultFood()" style="margin-top:10px; width:100%; padding:14px 0; border-radius:12px; background:linear-gradient(135deg, #5fa8ff, #3b82f6); color:white; font-weight:600; cursor:pointer; box-shadow:0 4px 10px rgba(59,130,246,0.3); border:none;">Add</button>
+        <div class="card">
+            <ul id="vaultList"></ul>
+        </div>
     </div>
-
-    <div class="card">
-        <ul id="vaultList"></ul>
-    </div>
-
 </div>
 
 <script src="app.js"></script>
